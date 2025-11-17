@@ -1,5 +1,6 @@
 import random
 from block import Block
+from settings import *
 
 SHAPES = {
     "I": [(0,0),(1,0),(2,0),(3,0)],
@@ -30,9 +31,27 @@ class Tetromino:
         self.fall_time = 0
 
     def move(self, dx, dy):
+        if not self.can_move(dx, dy):
+            return False
+        
         for b in self.blocks:
             b.x += dx
             b.y += dy
+
+        return True
+
+    def can_move(self, dx, dy):
+        for b in self.blocks:
+            new_x = b.x + dx
+            new_y = b.y + dy
+
+            if new_x < 0 or new_x >= COLS:
+                return False
+            
+            if new_y >= ROWS or self.grid.cells[new_y][new_x] != (0, 0, 0):
+                return False
+            
+        return True
 
     def draw(self, screen):
         for b in self.blocks:
