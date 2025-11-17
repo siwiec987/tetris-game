@@ -8,7 +8,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Tetris")
 clock = pygame.time.Clock()
 
-game = Tetris()
+game = Tetris(screen)
 
 while True:
     for event in pygame.event.get():
@@ -20,7 +20,7 @@ while True:
 
     screen.fill((0, 0, 0))
     game.update()
-    game.draw(screen)
+    game.draw()
 
     pygame.display.update()
     clock.tick(FPS)

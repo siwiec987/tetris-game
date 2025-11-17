@@ -39,6 +39,21 @@ class Tetromino:
             b.y += dy
 
         return True
+    
+    def rotate(self):
+        pivot = self.blocks[0]
+        new_positions = []
+
+        for b in self.blocks:
+            x = b.y - pivot.y
+            y = b.x - pivot.x
+            new_x = pivot.x - x
+            new_y = pivot.y + y
+            new_positions.append((new_x, new_y))
+
+        if all(0 <= x < COLS and 0 <= y < ROWS and self.grid.cells[y][x] == (0,0,0) for x,y in new_positions):
+            for i, b in enumerate(self.blocks):
+                b.x, b.y = new_positions[i]
 
     def can_move(self, dx, dy):
         for b in self.blocks:
