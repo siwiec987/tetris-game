@@ -12,8 +12,19 @@ class Tetris:
     def update(self):
         now = pygame.time.get_ticks()
         if now - self.last_fall > FALL_SPEED:
-            self.current_piece.move(0, 1)
+            if not self.current_piece.move(0, 1):
+                self.lock_piece()
+                self.new_piece()
+
             self.last_fall = now
+
+    def lock_piece(self):
+        for b in self.current_piece.blocks:
+            if b.y >= 0:
+                self.grid.cells[b.y][b.x] = b.color
+
+    def new_piece(self):
+        self.current_piece = Tetromino(self.grid)
 
     def draw(self, screen):
         self.grid.draw(screen)
