@@ -25,12 +25,15 @@ class Tetris:
             return
 
         now = pygame.time.get_ticks()
-        if now - self.last_fall > FALL_SPEED:
+        if now - self.last_fall > self.current_fall_speed():
             if not self.current_piece.move(0, 1):
                 self.lock_piece()
                 self.new_piece()
 
             self.last_fall = now
+
+    def current_fall_speed(self):
+        return max(50, FALL_SPEED - (self.level - 1) * 50)
 
     def lock_piece(self):
         for b in self.current_piece.blocks:
