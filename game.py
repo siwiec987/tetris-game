@@ -14,7 +14,7 @@ class Tetris:
         self.level = 1
         self.game_over = False
         self.play_again_rect = pygame.Rect(GRID_WIDTH + 10, 270, 180, 40)
-        self.background = Background('resources/background.jpg', 'Jakub Siwiec')
+        self.background = Background('resources/background.jpg', 'Jakub Siwiec', 'JPWMII')
 
         try:
             self.game_over_sound = pygame.mixer.Sound('resources/game-over.mp3')
