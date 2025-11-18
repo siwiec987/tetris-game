@@ -3,6 +3,7 @@ from settings import *
 from grid import Grid
 from tetromino import Tetromino
 from background import Background
+from dodo import Dodo
 
 class Tetris:
     def __init__(self, screen):
@@ -15,6 +16,7 @@ class Tetris:
         self.game_over = False
         self.play_again_rect = pygame.Rect(GRID_WIDTH + 10, 270, 180, 40)
         self.background = Background('resources/background.jpg', 'Jakub Siwiec', 'JPWMII')
+        self.dodo = Dodo(50, GRID_HEIGHT)
 
         try:
             self.game_over_sound = pygame.mixer.Sound('resources/game-over.mp3')
@@ -22,6 +24,8 @@ class Tetris:
             self.game_over_sound = None
 
     def update(self):
+        self.dodo.update()
+        
         if self.game_over:
             return
 
@@ -75,6 +79,8 @@ class Tetris:
 
     def draw(self):
         self.background.draw(self.screen)
+
+        self.dodo.draw(self.screen)
 
         self.grid.draw(self.screen)
         self.current_piece.draw(self.screen)
