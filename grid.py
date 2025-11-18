@@ -24,16 +24,20 @@ class Grid:
         for row in range(ROWS):
             for col in range(COLS):
                 color = self.cells[row][col]
-                pygame.draw.rect(
-                    screen,
-                    color,
-                    (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE),
-                    0
-                )
+                x = col * CELL_SIZE
+                y = row * CELL_SIZE
+
+                if color != (0, 0, 0):
+                    pygame.draw.rect(
+                        screen,
+                        color,
+                        (x, y, CELL_SIZE, CELL_SIZE),
+                        0
+                    )
 
                 pygame.draw.rect(
                     screen,
-                    (40, 40, 40),
+                    (150, 150, 150),
                     (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE),
                     1
                 )

@@ -2,6 +2,7 @@ import pygame
 from settings import *
 from grid import Grid
 from tetromino import Tetromino
+from background import Background
 
 class Tetris:
     def __init__(self, screen):
@@ -13,6 +14,7 @@ class Tetris:
         self.level = 1
         self.game_over = False
         self.play_again_rect = pygame.Rect(GRID_WIDTH + 10, 270, 180, 40)
+        self.background = Background('resources/background.jpg', 'Jakub Siwiec')
 
         try:
             self.game_over_sound = pygame.mixer.Sound('resources/game-over.mp3')
@@ -21,7 +23,6 @@ class Tetris:
 
     def update(self):
         if self.game_over:
-            self.draw_game_over()
             return
 
         now = pygame.time.get_ticks()
@@ -73,15 +74,20 @@ class Tetris:
         self.screen.blit(buton_text, text_rect)
 
     def draw(self):
+        self.background.draw(self.screen)
+
         self.grid.draw(self.screen)
         self.current_piece.draw(self.screen)
 
         font = pygame.font.SysFont("comicsans", 30)
-        score_label = font.render(f"WYNIK: {self.score}", 1, (255,255,255))
-        level_label = font.render(f"POZIOM: {self.level}", 1, (255,255,255))
+        score_label = font.render(f"WYNIK: {self.score}", 1, (255, 255, 255))
+        level_label = font.render(f"POZIOM: {self.level}", 1, (255, 255, 255))
 
         self.screen.blit(score_label, (GRID_WIDTH + 10, 10))
         self.screen.blit(level_label, (GRID_WIDTH + 10, 50))
+
+        if self.game_over:
+            self.draw_game_over()
 
     def handle_input(self, event):
         if event.type == pygame.KEYDOWN:
