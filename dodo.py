@@ -1,9 +1,10 @@
 import pygame
 from settings import *
+from utils import absolute_path
 
 class Dodo:
     def __init__(self, x, y):
-        sheet = pygame.image.load('resources/dodo.png').convert_alpha()
+        sheet = pygame.image.load(absolute_path('resources/dodo.png')).convert_alpha()
         sw, sh = sheet.get_size()
         self.cols = 3
         self.rows = 4

@@ -4,6 +4,7 @@ from grid import Grid
 from tetromino import Tetromino
 from background import Background
 from dodo import Dodo
+from utils import absolute_path
 
 class Tetris:
     def __init__(self, screen):
@@ -15,11 +16,11 @@ class Tetris:
         self.level = 1
         self.game_over = False
         self.play_again_rect = pygame.Rect(GRID_WIDTH + 10, 270, 180, 40)
-        self.background = Background('resources/background.jpg', 'Jakub Siwiec', 'JPWMII')
+        self.background = Background(absolute_path('resources/background.jpg'), 'Jakub Siwiec', 'JPWMII')
         self.dodo = Dodo(50, GRID_HEIGHT)
 
         try:
-            self.game_over_sound = pygame.mixer.Sound('resources/game-over.mp3')
+            self.game_over_sound = pygame.mixer.Sound(absolute_path('resources/game-over.mp3'))
         except Exception:
             self.game_over_sound = None
 
