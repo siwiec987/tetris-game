@@ -1,3 +1,10 @@
+import os
+import sys
+
 def absolute_path(relative_path):
-    base_path = '/Users/jakubsiwiec/Documents/Studia/7/JPWMII/PROJEKT KOŃCOWY/tetris-game/'
-    return base_path + relative_path
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
